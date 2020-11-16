@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
-#include "tf_ops/text_distorter.h"  // sequence_projection
+#include "tf_ops/text_distorter.h"  // seq_flow_lite
 
 using tensorflow::uint32;
 

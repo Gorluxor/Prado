@@ -29,9 +29,10 @@ def classification_metric(per_example_loss, label_ids, logits):
 
 def labeling_metric(per_example_loss, label_ids, logits):
   """Compute eval metrics."""
+  scores = tf.math.sigmoid(logits)
   num_classes = label_ids.get_shape().as_list()[-1]
   return_dict = {"eval_loss": tf.metrics.mean(per_example_loss)}
   for idx in range(num_classes):
-    return_dict["auc/" + str(idx)] = tf.metrics.auc(
-        label_ids[:, idx], tf.math.sigmoid(logits[:, idx]))
+    return_dict["auc/" + str(idx)] = tf.metrics.auc(label_ids[:, idx],
+                                                    scores[:, idx])
   return return_dict

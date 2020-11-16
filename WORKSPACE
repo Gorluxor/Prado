@@ -1,4 +1,4 @@
-workspace(name = "tensorflow_models_sequence_projection")
+workspace(name = "tensorflow_models_seq_flow_lite")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@//third_party/py:python_configure.bzl", "python_configure")

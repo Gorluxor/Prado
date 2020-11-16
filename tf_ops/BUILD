@@ -10,6 +10,15 @@ package(
     ],
 )
 
+py_library(
+    name = "text_projection",
+    srcs = ["text_projection.py"],
+    srcs_version = "PY3",
+    deps = [
+        ":sequence_string_projection_op_py",
+    ],
+)
+
 cc_library(
     name = "sequence_string_projection_op",
     srcs = [
@@ -117,4 +126,20 @@ gen_op_wrapper_py(
     name = "sequence_string_projection_op_py",
     out = "sequence_string_projection_op.py",
     kernel_lib = ":sequence_string_projection_op",
+)
+
+cc_library(
+    name = "tf_custom_ops",
+    srcs = ["tf_custom_ops.cc"],
+    deps = [
+        "@tensorflow_includes//:includes",
+        "@tensorflow_solib//:framework_lib",
+    ],
+    alwayslink = 1,
+)
+
+gen_op_wrapper_py(
+    name = "tf_custom_ops_py",
+    out = "tf_custom_ops_py.py",
+    kernel_lib = ":tf_custom_ops",
 )

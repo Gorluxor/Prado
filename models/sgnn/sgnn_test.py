@@ -14,11 +14,11 @@
 # ==============================================================================
 
 # Lint as: python3
-"""Tests for sequence_projection.sgnn."""
+"""Tests for seq_flow_lite.sgnn."""
 
 import tensorflow as tf
 from tensorflow.python.framework import test_util  # pylint: disable=g-direct-tensorflow-import
-import sgnn # import sequence_projection module
+from models import sgnn # import seq_flow_lite module
 
 
 @test_util.run_all_in_graph_and_eager_modes

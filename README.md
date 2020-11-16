@@ -35,7 +35,7 @@ models computes them on the fly.
 Train a PRADO model on civil comments dataset
 
 ```shell
-bazel run -c opt prado:runner -- \
+bazel run -c opt prado:trainer -- \
 --config_path=$(pwd)/prado/civil_comments_prado.txt \
 --runner_mode=train --logtostderr --output_dir=/tmp/prado
 ```
@@ -51,7 +51,7 @@ bazel run -c opt sgnn:train -- --logtostderr --output_dir=/tmp/sgnn
 Evaluate PRADO model:
 
 ```shell
-bazel run -c opt prado:runner -- \
+bazel run -c opt prado:trainer -- \
 --config_path=$(pwd)/prado/civil_comments_prado.txt \
 --runner_mode=eval --output_dir= --logtostderr
 ```

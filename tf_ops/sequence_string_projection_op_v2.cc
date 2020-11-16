@@ -17,9 +17,9 @@ limitations under the License.
 #include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/tensor.h"
 #include "tensorflow/core/framework/tensor_shape.h"
-#include "tf_ops/projection_normalizer_util.h"  // sequence_projection
-#include "tf_ops/projection_util.h"  // sequence_projection
-#include "tf_ops/text_distorter.h"  // sequence_projection
+#include "tf_ops/projection_normalizer_util.h"  // seq_flow_lite
+#include "tf_ops/projection_util.h"  // seq_flow_lite
+#include "tf_ops/text_distorter.h"  // seq_flow_lite
 
 using ::tensorflow::int32;
 using ::tensorflow::int64;
@@ -107,9 +107,9 @@ class SequenceStringProjectionOpV2 : public OpKernel {
     std::vector<uint64_t> hash_codes;
     for (int64 i = 0; i < batch_size; ++i) {
       const int64 num_tokens = seq_len_vector(i);
-      OP_REQUIRES(ctx, num_tokens > 0,
-                  InvalidArgument(
-                      "`sequence_length` should have values greater than 0"));
+      OP_REQUIRES(ctx, num_tokens >= 0,
+                  InvalidArgument("`sequence_length` should have values "
+                                  "greater than or equal to 0"));
       OP_REQUIRES(ctx, num_tokens <= max_seq_len,
                   InvalidArgument("`sequence_length` should have values less "
                                   "than or equal to max_seq_len"));
@@ -181,10 +181,9 @@ REGISTER_OP("SequenceStringProjectionV2")
       const int kMaxFeatureSize = 4096;
       CHECK_GT(feature_size, 0);
       CHECK_LE(feature_size, kMaxFeatureSize);
-      ShapeHandle output_shape;
-      TF_RETURN_IF_ERROR(c->Concatenate(
-          c->input(0), c->MakeShape({feature_size}), &output_shape));
-      c->set_output(0, output_shape);
+      auto batch_size = c->Dim(c->input(0), 0);
+      c->set_output(0, c->MakeShape({batch_size, InferenceContext::kUnknownDim,
+                                     feature_size}));
       return tensorflow::Status::OK();
     })
     .Doc(R"doc(

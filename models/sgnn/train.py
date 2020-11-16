@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-
 """Script to train langid model.
 
 The script builds language detection from wikipedia dataset,
@@ -27,7 +26,7 @@ import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 
-import sgnn # import sequence_projection module
+from models import sgnn # import seq_flow_lite module
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_dir', '/tmp/langid',

@@ -82,7 +82,7 @@ TEST_F(SequenceStringProjectionOpV2Test, TestOutput) {
 
   *mutable_input(1).tensor = Tensor(DT_INT32, TensorShape({2}));
   (*mutable_input(1).tensor).flat<int32>()(0) = 9;
-  (*mutable_input(1).tensor).flat<int32>()(1) = 0;
+  (*mutable_input(1).tensor).flat<int32>()(1) = -1;
 
   EXPECT_EQ(
       RunOpKernel().error_message(),
@@ -91,7 +91,7 @@ TEST_F(SequenceStringProjectionOpV2Test, TestOutput) {
   (*mutable_input(1).tensor).flat<int32>()(0) = 4;
 
   EXPECT_EQ(RunOpKernel().error_message(),
-            "`sequence_length` should have values greater than 0");
+            "`sequence_length` should have values greater than or equal to 0");
 
   (*mutable_input(1).tensor).flat<int32>()(1) = 8;
 

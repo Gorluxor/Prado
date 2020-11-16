@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "sgnn/sgnn_projection.h"  // sequence_projection
+#include "models/sgnn/sgnn_projection.h"  // seq_flow_lite
 
 #include <cstdlib>
 #include <iostream>
@@ -106,7 +106,7 @@ TfLiteStatus Eval(TfLiteContext* context, TfLiteNode* node) {
       int index = row_splits->data.i64[i - 1] + j;
       StringRef str = GetString(ngrams, index);
       hash_signature[j] =
-          util::Fingerprint64(str.str, str.len)  % attributes.buckets;
+          util::Fingerprint64(str.str, str.len) % attributes.buckets;
     }
     for (int k = 0; k < attributes.hash_seed.size(); ++k) {
       double result = 0;

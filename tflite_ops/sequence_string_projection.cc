@@ -15,7 +15,7 @@ limitations under the License.
 /**
  * Sequence String projection op used in PRADO.
  */
-#include "tflite_ops/sequence_string_projection.h"  // sequence_projection
+#include "tflite_ops/sequence_string_projection.h"  // seq_flow_lite
 
 #include <algorithm>
 #include <cmath>
@@ -27,9 +27,9 @@ limitations under the License.
 
 #include "flatbuffers/flexbuffers.h"  // flatbuffer
 #include "tensorflow/lite/string_util.h"
-#include "tf_ops/projection_normalizer_util.h"  // sequence_projection
-#include "tf_ops/projection_util.h"  // sequence_projection
-#include "tflite_ops/quantization_util.h"  // sequence_projection
+#include "tf_ops/projection_normalizer_util.h"  // seq_flow_lite
+#include "tf_ops/projection_util.h"  // seq_flow_lite
+#include "tflite_ops/quantization_util.h"  // seq_flow_lite
 
 namespace tflite {
 namespace ops {

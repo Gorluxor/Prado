@@ -4,9 +4,7 @@ load("@org_tensorflow//tensorflow/lite:build_def.bzl", "tflite_copts")
 licenses(["notice"])
 
 package(
-    default_visibility = [
-        "//:__subpackages__",  # sequence projection
-    ],
+    default_visibility = ["//:friends"],  # sequence projection
 )
 
 cc_library(
@@ -18,8 +16,8 @@ cc_library(
         ":quantization_util",
         "@org_tensorflow//tensorflow/lite:string_util",
         "@org_tensorflow//tensorflow/lite/kernels:builtin_ops",
-        "///tf_ops:projection_normalizer_util",  # sequence projection
-        "///tf_ops:projection_util",  # sequence projection
+        "//tf_ops:projection_normalizer_util",  # sequence projection
+        "//tf_ops:projection_util",  # sequence projection
         "@flatbuffers",
     ],
     alwayslink = 1,
@@ -32,14 +30,14 @@ cc_test(
     deps = [
         ":sequence_string_projection",
         ":tf_tflite_diff_test_util",
+        "@flatbuffers",
         "@org_tensorflow//tensorflow/lite:framework",
         "@org_tensorflow//tensorflow/lite:string_util",
         "@org_tensorflow//tensorflow/lite/core/api",
         "@org_tensorflow//tensorflow/lite/kernels:builtin_ops",
         "@org_tensorflow//tensorflow/lite/kernels:test_util",
-        "///tf_ops:sequence_string_projection_op",  # sequence projection
-        "///tf_ops:sequence_string_projection_op_v2",  # sequence projection
-        "@flatbuffers",
+        # "//tf_ops:sequence_string_projection_op"  # sequence projection
+        "//tf_ops:sequence_string_projection_op_v2",  # sequence projection
     ],
 )
 
@@ -75,4 +73,29 @@ cc_library(
         "@org_tensorflow//tensorflow/lite/kernels:builtin_ops",
     ],
     alwayslink = 1,
+)
+
+cc_library(
+    name = "layer_norm",
+    srcs = ["layer_norm.cc"],
+    hdrs = ["layer_norm.h"],
+    copts = tflite_copts(),
+    deps = [
+        ":quantization_util",
+        "@org_tensorflow//tensorflow/lite/kernels:builtin_ops",
+        "@flatbuffers",
+    ],
+    alwayslink = 1,
+)
+
+cc_test(
+    name = "layer_norm_test",
+    size = "small",
+    srcs = ["layer_norm_test.cc"],
+    deps = [
+        ":layer_norm",
+        "@org_tensorflow//tensorflow/lite/kernels:test_util",
+        "@com_google_googletest//:gtest_main",
+        "@flatbuffers",
+    ],
 )

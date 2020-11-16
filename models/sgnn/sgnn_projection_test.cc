@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "sgnn/sgnn_projection.h"  // sequence_projection
+#include "models/sgnn/sgnn_projection.h"  // seq_flow_lite
 
 #include <string>
 #include <vector>

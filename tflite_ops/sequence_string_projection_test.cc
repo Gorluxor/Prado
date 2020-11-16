@@ -12,11 +12,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
-#include "tflite_ops/sequence_string_projection.h"  // sequence_projection
+#include "tflite_ops/sequence_string_projection.h"  // seq_flow_lite
 
 #include <vector>
 
-#include "tflite_ops/tf_tflite_diff_test_util.h"  // sequence_projection
+#include "tflite_ops/tf_tflite_diff_test_util.h"  // seq_flow_lite
 #include "flatbuffers/flexbuffers.h"  // flatbuffer
 #include "tensorflow/lite/interpreter.h"
 #include "tensorflow/lite/kernels/register.h"
